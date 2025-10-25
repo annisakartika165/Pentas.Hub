@@ -1,54 +1,149 @@
-<!DOCTYPE html>
-<html lang="id">
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pembayaran Tiket - Feast Konser</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FeastKonser — Pembayaran</title>
+  <style>
+    body{font-family:Inter,system-ui,Segoe UI,Roboto,Arial;margin:0;padding:20px;background:#0f172a;color:#e6eef8}
+    .card{background:#0b1220;padding:20px;border-radius:12px;max-width:760px;margin:24px auto;box-shadow:0 8px 30px rgba(2,6,23,.6)}
+    h1{font-size:20px;margin:0 0 12px}
+    .methods{display:flex;gap:12px;flex-wrap:wrap}
+    .method{background:#071028;padding:12px;border-radius:10px;cursor:pointer;border:2px solid transparent}
+    .method input{display:none}
+    .method.selected{border-color:#2563eb}
+    .qr-box, .ewallet-box{margin-top:18px;background:#071028;padding:16px;border-radius:10px}
+    .qr-img{width:220px;height:220px;border-radius:8px;background:#fff;display:block}
+    .ewallet-buttons{display:flex;gap:12px}
+    .ewallet-btn{padding:10px 14px;border-radius:8px;border:none;cursor:pointer;font-weight:600}
+    .note{margin-top:12px;color:#9fb0d1;font-size:13px}
+    .small{font-size:13px;color:#9fb0d1}
+    .actions{margin-top:14px}
+    .btn{background:#2563eb;color:white;padding:10px 14px;border-radius:8px;border:none;cursor:pointer}
+    .btn.ghost{background:transparent;border:1px solid #2b6cb0}
+    .flex{display:flex;gap:12px;align-items:center}
+    img.logo{height:28px}
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Pembayaran Tiket</h1>
-  </header>
+  <div class="card">
+    <h1>Metode Pembayaran</h1>
+    <p class="small">Pilih metode pembayaran: QRIS (scan) atau e‑wallet. Untuk kartu kredit kita ganti jadi e‑wallet (Dana / OVO / GoPay).</p>
 
-  <main class="form-container">
-    <h2>Isi Data Pemesanan</h2>
-    <form onsubmit="return showSuccess(event)">
-      <label>Nama Lengkap</label>
-      <input type="text" required placeholder="Masukkan nama lengkap Anda">
+    <div class="methods" role="radiogroup" aria-label="Metode Pembayaran">
+      <label class="method" id="m-qris">
+        <input type="radio" name="pay" value="qris">
+        <div class="flex"><img class="logo" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28'><rect width='28' height='28' rx='6' fill='%232563eb'/><text x='14' y='18' font-family='Arial' font-size='12' fill='white' text-anchor='middle'>QR</text></svg>" alt="QRIS"></div>
+        <div class="small">QRIS (Scan)</div>
+      </label>
 
-      <label>Email</label>
-      <input type="email" required placeholder="nama@email.com">
+      <label class="method" id="m-ewallet">
+        <input type="radio" name="pay" value="ewallet">
+        <div class="flex">
+          <img class="logo" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28'><rect width='28' height='28' rx='6' fill='%230fbf5b'/><text x='14' y='18' font-family='Arial' font-size='10' fill='white' text-anchor='middle'>EW</text></svg>" alt="E-Wallet">
+        </div>
+        <div class="small">E-Wallet (Dana, OVO, GoPay)</div>
+      </label>
+    </div>
 
-      <label>Pilih Kelas Tiket</label>
-      <select required>
-        <option value="">-- Pilih Tiket --</option>
-        <option>Festival - Rp150.000</option>
-        <option>VIP - Rp250.000</option>
-        <option>VVIP - Rp350.000</option>
-      </select>
+    <!-- QRIS area -->
+    <div class="qr-box" id="qr-box" style="display:none">
+      <h2 style="margin:0 0 8px;font-size:16px;color:#dbeafe">QRIS — Scan untuk Bayar</h2>
+      <p class="small">Buka aplikasi e‑wallet, pilih scan/QR, dan arahkan ke kode di bawah.</p>
 
-      <label>Metode Pembayaran</label>
-      <select required>
-        <option value="">-- Pilih Metode --</option>
-        <option>Transfer Bank</option>
-        <option>QRIS</option>
-        <option>E-Wallet</option>
-      </select>
+      <div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap">
+        <div>
+          <img id="qris-img" class="qr-img" alt="QRIS code" src="images/qris.png" />
+        </div>
 
-      <button type="submit" class="btn">Bayar Sekarang</button>
-    </form>
-  </main>
+        <div style="min-width:220px;">
+          <div class="note">Nominal: <strong>Rp 75.000</strong></div>
+          <div class="note">Order ID: <strong>INV-20251025-001</strong></div>
 
-  <footer>
-    <p>&copy; 2025 Feast Konser | All Rights Reserved</p>
-  </footer>
+          <div class="actions">
+            <button class="btn" id="btn-paid-qris">Saya sudah bayar (Scan selesai)</button>
+            <button class="btn ghost" id="btn-download-qr">Download QR</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- E-wallet area -->
+    <div class="ewallet-box" id="ewallet-box" style="display:none">
+      <h2 style="margin:0 0 8px;font-size:16px;color:#dbeafe">Bayar lewat E‑Wallet</h2>
+      <p class="small">Pilih e‑wallet yang kamu pakai. Kita pakai deep link (jika di HP) atau tampilkan instruksi.</p>
+
+      <div class="ewallet-buttons">
+        <button class="ewallet-btn" data-wallet="dana" id="btn-dana">Dana</button>
+        <button class="ewallet-btn" data-wallet="ovo" id="btn-ovo">OVO</button>
+        <button class="ewallet-btn" data-wallet="gopay" id="btn-gopay">GoPay</button>
+      </div>
+
+      <div class="note" id="ewallet-note">Pilih e‑wallet untuk melihat instruksi.</div>
+      <div class="actions" style="margin-top:8px">
+        <button class="btn" id="btn-paid-ewallet">Saya sudah bayar</button>
+      </div>
+    </div>
+
+  </div>
 
   <script>
-    function showSuccess(e) {
-      e.preventDefault();
-      window.location.href = "sukses.html";
-    }
+    // Toggle metode pembayaran
+    const mQris = document.getElementById('m-qris')
+    const mEwallet = document.getElementById('m-ewallet')
+    const qrBox = document.getElementById('qr-box')
+    const ewalletBox = document.getElementById('ewallet-box')
+    const methods = document.querySelectorAll('.method')
+
+    function clearSelected(){ methods.forEach(m=>m.classList.remove('selected')) }
+
+    mQris.addEventListener('click', ()=>{
+      clearSelected(); mQris.classList.add('selected')
+      qrBox.style.display = 'block'
+      ewalletBox.style.display = 'none'
+    })
+    mEwallet.addEventListener('click', ()=>{
+      clearSelected(); mEwallet.classList.add('selected')
+      qrBox.style.display = 'none'
+      ewalletBox.style.display = 'block'
+    })
+
+    // E-wallet buttons
+    document.querySelectorAll('.ewallet-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const w = btn.dataset.wallet
+        const note = document.getElementById('ewallet-note')
+        const deep = {
+          dana: 'dana://pay?amount=75000&ref=INV-20251025-001',
+          ovo: 'ovo://payment?amount=75000&ref=INV-20251025-001',
+          gopay: 'gopay://pay?amount=75000&ref=INV-20251025-001'
+        }
+        note.innerHTML = `Instruksi: Klik tombol bayar atau buka app dan scan/masukkan kode. <br> (Deep link: <code>${deep[w]}</code>)`
+        // window.location.href = deep[w]  // opsional buka app mobile
+      })
+    })
+
+    // Download QR
+    document.getElementById('btn-download-qr').addEventListener('click', ()=>{
+      const img = document.getElementById('qris-img')
+      const link = document.createElement('a')
+      link.href = img.src
+      link.download = 'qris.png'
+      document.body.appendChild(link)
+      link.click()
+      link.remove()
+    })
+
+    // Paid buttons (simulasi)
+    document.getElementById('btn-paid-qris').addEventListener('click', ()=>{
+      alert('Terima kasih — pembayaran QRIS terkonfirmasi (simulasi).')
+    })
+    document.getElementById('btn-paid-ewallet').addEventListener('click', ()=>{
+      alert('Terima kasih — pembayaran e‑wallet terkonfirmasi (simulasi).')
+    })
+
+    // Auto-select QRIS by default
+    mQris.click()
   </script>
 </body>
 </html>
