@@ -1,0 +1,180 @@
+/* === GENERAL RESET === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: #0c0c0c;
+  color: #fff;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* === HEADER === */
+header {
+  background: linear-gradient(90deg, #ff004c, #8000ff);
+  padding: 20px;
+  text-align: center;
+  color: white;
+  animation: fadeInDown 1s ease-out;
+}
+
+header h1 {
+  font-size: 2.2em;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* === MAIN CONTENT === */
+main {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 20px;
+  text-align: center;
+  animation: fadeInUp 1s ease-out;
+}
+
+main img {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(255, 0, 76, 0.6);
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+main img:hover {
+  transform: scale(1.03);
+  opacity: 0.9;
+}
+
+main h2 {
+  margin-top: 20px;
+  font-size: 1.8em;
+  color: #ff004c;
+}
+
+/* === BUTTON === */
+.btn {
+  display: inline-block;
+  margin-top: 25px;
+  padding: 12px 25px;
+  background-color: #ff004c;
+  color: white;
+  font-size: 1em;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #ff3385;
+  transform: scale(1.05);
+}
+
+/* === FORM PEMBAYARAN === */
+form {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(255, 0, 76, 0.3);
+  width: 90%;
+  max-width: 500px;
+  margin: 30px auto;
+}
+
+label {
+  display: block;
+  text-align: left;
+  margin-top: 15px;
+  font-weight: 500;
+  color: #ff80bf;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  margin-top: 5px;
+  outline: none;
+  font-size: 1em;
+}
+
+input[type="number"] {
+  text-align: center;
+}
+
+.total {
+  font-size: 1.2em;
+  margin-top: 20px;
+  color: #ff004c;
+  font-weight: bold;
+}
+
+.pay-btn {
+  background: linear-gradient(90deg, #ff004c, #8000ff);
+  border: none;
+  color: white;
+  padding: 12px;
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 25px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.pay-btn:hover {
+  transform: scale(1.05);
+}
+
+/* === FOOTER === */
+footer {
+  text-align: center;
+  padding: 15px;
+  color: #ccc;
+  font-size: 0.9em;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 50px;
+}
+
+/* === ANIMATIONS === */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 1.6em;
+  }
+
+  main img {
+    max-width: 100%;
+  }
+
+  form {
+    width: 95%;
+  }
+}

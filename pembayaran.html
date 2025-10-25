@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pembayaran Tiket - Feast Konser</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Pembayaran Tiket</h1>
+  </header>
+
+  <main class="form-container">
+    <h2>Isi Data Pemesanan</h2>
+    <form onsubmit="return showSuccess(event)">
+      <label>Nama Lengkap</label>
+      <input type="text" required placeholder="Masukkan nama lengkap Anda">
+
+      <label>Email</label>
+      <input type="email" required placeholder="nama@email.com">
+
+      <label>Pilih Kelas Tiket</label>
+      <select required>
+        <option value="">-- Pilih Tiket --</option>
+        <option>Festival - Rp150.000</option>
+        <option>VIP - Rp250.000</option>
+        <option>VVIP - Rp350.000</option>
+      </select>
+
+      <label>Metode Pembayaran</label>
+      <select required>
+        <option value="">-- Pilih Metode --</option>
+        <option>Transfer Bank</option>
+        <option>QRIS</option>
+        <option>E-Wallet</option>
+      </select>
+
+      <button type="submit" class="btn">Bayar Sekarang</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Feast Konser | All Rights Reserved</p>
+  </footer>
+
+  <script>
+    function showSuccess(e) {
+      e.preventDefault();
+      window.location.href = "sukses.html";
+    }
+  </script>
+</body>
+</html>
