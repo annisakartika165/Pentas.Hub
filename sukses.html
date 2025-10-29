@@ -8,43 +8,41 @@
 <style>
 body {
   font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
   background: linear-gradient(135deg, #0d0221, #0f172a);
   color: #fff;
   text-align: center;
-  padding: 80px 20px;
+  overflow-x: hidden;
 }
 h1 {
   font-family: 'Montserrat', sans-serif;
   color: #00ff99;
-  font-size: 2.5em;
+  font-size: 2.2em;
+  margin-top: 80px;
   text-shadow: 0 0 20px #00ffcc, 0 0 40px #7a00ff;
-  animation: glow 1.5s ease-in-out infinite alternate;
 }
-@keyframes glow {
-  from { text-shadow: 0 0 20px #00ffcc, 0 0 40px #7a00ff; }
-  to { text-shadow: 0 0 35px #00ffcc, 0 0 60px #7a00ff; }
-}
-.container {
-  margin-top: 50px;
-}
-.button {
+button {
   background: linear-gradient(90deg, #7a00ff, #00ff99);
-  color: white;
+  color: #fff;
   border: none;
   padding: 15px 35px;
   border-radius: 12px;
   font-size: 18px;
   cursor: pointer;
   font-weight: bold;
+  margin-top: 30px;
   box-shadow: 0 0 20px #00ffcc, 0 0 40px #7a00ff;
   transition: 0.3s;
 }
-.button:hover {
+button:hover {
   transform: scale(1.05);
   box-shadow: 0 0 40px #8a2be2, 0 0 70px #00ff99;
 }
+
+/* Particles */
 .particles {
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
   top: 0; left: 0;
@@ -53,45 +51,38 @@ h1 {
 }
 .particle {
   position: absolute;
-  background: #00ffcc;
+  background: #fff;
   border-radius: 50%;
   opacity: 0.7;
   animation: move 5s linear infinite;
 }
 @keyframes move {
-  0% { transform: translateY(0) scale(0.5); opacity:0.7; }
-  100% { transform: translateY(-100vh) scale(1); opacity:0; }
+  0% { transform: translateY(0) scale(0.5); opacity: 0.7; }
+  100% { transform: translateY(-100vh) scale(1); opacity: 0; }
 }
 </style>
 </head>
 <body>
 <h1>🎉 Pembayaran Berhasil!</h1>
+<button onclick="window.location.href='index.html'">Kembali ke Beranda</button>
 
-<div class="container">
-  <button class="button" onclick="kembali()">Kembali ke Beranda</button>
-</div>
-
+<!-- Container partikel -->
 <div class="particles" id="particles"></div>
 
 <script>
-// tombol kembali
-function kembali() {
-  window.location.href = "index.html";
-}
-
-// generate particles
+// Generate particles
 const particleCount = 50;
 const container = document.getElementById('particles');
 
-for(let i=0;i<particleCount;i++){
+for(let i=0; i<particleCount; i++){
   const p = document.createElement('div');
   p.classList.add('particle');
-  const size = Math.random() * 10 + 5;
+  const size = Math.random() * 10 + 5; // ukuran 5-15px
   p.style.width = size + 'px';
   p.style.height = size + 'px';
   p.style.left = Math.random() * window.innerWidth + 'px';
   p.style.bottom = -20 + 'px';
-  p.style.animationDuration = 3 + Math.random() * 5 + 's';
+  p.style.animationDuration = 3 + Math.random() * 5 + 's'; // durasi 3-8 detik
   container.appendChild(p);
 }
 </script>

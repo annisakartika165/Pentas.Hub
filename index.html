@@ -11,75 +11,64 @@ body {
   background: radial-gradient(circle at top left, #12002f, #000010);
   color: #e0e0e0;
   text-align: center;
-  padding: 40px;
+  margin: 0;
+  padding: 20px;
 }
 h1 {
   font-family: 'Montserrat', sans-serif;
   color: #b56bff;
-  text-shadow: 0 0 20px #8a2be2, 0 0 40px #00ff99;
-  font-size: 2.2em;
+  text-shadow: 0 0 15px #8a2be2, 0 0 30px #00ff99;
+  font-size: 2em;
 }
 .poster img {
-  width: 80%;
+  width: 100%;
   max-width: 600px;
-  border-radius: 20px;
+  height: auto;
+  border-radius: 15px;
   box-shadow: 0 0 25px rgba(128,0,255,0.7), 0 0 50px rgba(0,255,128,0.5);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.poster img:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 35px rgba(128,0,255,0.9), 0 0 60px rgba(0,255,128,0.7);
 }
 form {
   background: rgba(20,20,40,0.85);
   display: inline-block;
-  padding: 30px 45px;
-  border-radius: 20px;
-  box-shadow: 0 0 30px #7a00ff, 0 0 60px #00ff99;
-  margin-top: 30px;
-  transition: 0.3s ease;
+  width: 90%;
+  max-width: 400px;
+  padding: 20px;
+  border-radius: 15px;
+  margin-top: 20px;
 }
 input, select {
   display: block;
-  margin: 12px auto;
-  width: 260px;
+  margin: 10px auto;
+  width: 100%;
   padding: 10px;
-  border: none;
   border-radius: 8px;
+  border: none;
   background-color: #1f1f3a;
   color: #fff;
-  outline: none;
-  box-shadow: inset 0 0 10px #8a2be2;
-}
-input:focus, select:focus {
-  box-shadow: 0 0 15px #00ffcc, inset 0 0 12px #7a00ff;
 }
 button {
   background: linear-gradient(90deg, #7a00ff, #00ff99);
-  color: white;
+  color: #fff;
   border: none;
-  padding: 12px 30px;
+  padding: 12px 20px;
   border-radius: 10px;
-  cursor: pointer;
-  margin-top: 15px;
   font-weight: bold;
-  box-shadow: 0 0 15px #00ffcc;
-  transition: 0.3s;
+  cursor: pointer;
+  margin-top: 10px;
+  width: 100%;
 }
 button:hover {
-  box-shadow: 0 0 40px #8a2be2, 0 0 60px #00ff99;
   transform: scale(1.05);
 }
 #total {
-  font-size: 18px;
   margin-top: 10px;
+  font-weight: bold;
   color: #00ffcc;
-  text-shadow: 0 0 10px #00ffcc;
 }
 footer {
-  margin-top: 50px;
-  color: #888;
+  margin-top: 30px;
   font-size: 14px;
+  color: #888;
 }
 </style>
 </head>
@@ -89,6 +78,7 @@ footer {
 <div class="poster">
   <img src="images/Poster.JPG" alt="Poster Konser Pentas.Hub">
 </div>
+
 <form action="tiket.html" method="get">
   <label>Nama Lengkap:</label>
   <input type="text" name="nama" required>
