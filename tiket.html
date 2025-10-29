@@ -9,10 +9,11 @@
 body { font-family:'Poppins',sans-serif; background: linear-gradient(135deg,#0d0221,#0f172a); color:#fff; text-align:center; padding:20px; }
 h1 { font-family:'Montserrat',sans-serif; color:#b56bff; text-shadow:0 0 15px #8a2be2,0 0 25px #00ff99; }
 .container { background: rgba(25,25,45,0.9); display:inline-block; width:90%; max-width:400px; padding:20px; border-radius:15px; margin-top:20px; }
-select, button { width:100%; margin:10px 0; padding:10px; border-radius:8px; border:none; }
+select, input, p, button { width:100%; margin:10px 0; padding:10px; border-radius:8px; border:none; box-sizing:border-box; }
 button { background: linear-gradient(90deg, #7a00ff, #00ff99); color:#fff; font-weight:bold; cursor:pointer; }
 button:hover { transform: scale(1.05); }
 img { width:100%; max-width:200px; display:none; margin:10px auto; border-radius:10px; }
+.info { background: rgba(0,0,0,0.3); padding:10px; border-radius:8px; margin-top:10px; color:#00ffcc; }
 </style>
 </head>
 <body>
@@ -22,12 +23,27 @@ img { width:100%; max-width:200px; display:none; margin:10px auto; border-radius
   <label>Pilih Metode Pembayaran:</label>
   <select id="metode" onchange="tampilMetode()">
     <option value="">-- Pilih Metode --</option>
-    <option value="E-Wallet">E-Wallet</option>
+    <option value="E-Wallet">E-Wallet (OVO / DANA / GoPay)</option>
     <option value="Transfer Bank">Transfer Bank</option>
     <option value="QRIS">QRIS</option>
   </select>
 
+  <!-- Info E-Wallet -->
+  <p id="ewalletInfo" class="info" style="display:none;">
+    Nomor: 081617515768<br>
+    Atas Nama: Pentas.Hub Indonesia
+  </p>
+
+  <!-- Info Transfer -->
+  <p id="transferInfo" class="info" style="display:none;">
+    Blu by BCA Digital: 006843314797<br>
+    Seabank: 901554759769<br>
+    Atas Nama: Pentas.Hub Indonesia
+  </p>
+
+  <!-- QRIS -->
   <img id="qris" src="images/Qris.JPG" alt="QRIS">
+  <p id="qrisInfo" class="info" style="display:none;">Atas Nama: Pentas.Hub Indonesia</p>
 
   <button id="bayarBtn" onclick="bayar()">Bayar Sekarang</button>
 </div>
@@ -35,12 +51,22 @@ img { width:100%; max-width:200px; display:none; margin:10px auto; border-radius
 <script>
 function tampilMetode() {
   const metode = document.getElementById('metode').value;
-  const qrisImg = document.getElementById('qris');
-  const bayarBtn = document.getElementById('bayarBtn');
-  qrisImg.style.display = 'none';
-  if(metode === 'QRIS') qrisImg.style.display='block';
+  document.getElementById('ewalletInfo').style.display = 'none';
+  document.getElementById('transferInfo').style.display = 'none';
+  document.getElementById('qris').style.display = 'none';
+  document.getElementById('qrisInfo').style.display = 'none';
+
+  if(metode === 'E-Wallet') document.getElementById('ewalletInfo').style.display = 'block';
+  if(metode === 'Transfer Bank') document.getElementById('transferInfo').style.display = 'block';
+  if(metode === 'QRIS') {
+    document.getElementById('qris').style.display='block';
+    document.getElementById('qrisInfo').style.display='block';
+  }
 }
-function bayar() { window.location.href="sukses.html"; }
+
+function bayar() {
+  window.location.href="sukses.html";
+}
 </script>
 </body>
 </html>
